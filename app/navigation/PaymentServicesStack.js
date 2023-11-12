@@ -15,7 +15,7 @@ export default function PaymentServicesStack() {
             <Stack.Screen
                 name="paymentServicesStack"
                 component={ PaymentServices }
-                options={{ title: "Favoritos" }}
+                options={{ title: "Servicios" }}
             />
         </Stack.Navigator>
     )

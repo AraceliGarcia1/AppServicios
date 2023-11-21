@@ -1,16 +1,33 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import React, {useState} from "react";
+import { StyleSheet, Text, View, TextInput, TouchableOpacity  } from 'react-native';
+import * as Yup from 'yup';
+
 
 export default function RegisterJuegos(){
     const [alias, setAlias] = useState('');
-    const [reference, setReference] = useState('');
+    const [referencia, setReferencia] = useState('');
     const [amount, setAmount] = useState('');
-
-    const handleSave = () => {
-        
-        console.log('Alias:', alias);
-        console.log('Reference:', reference);
-        console.log('Amount:', amount);
+ 
+    const schema = Yup.object().shape({
+        alias: Yup.string().required('Alias es obligatorio'),
+        referencia: Yup.string().required('Referencia es obligatoria'),
+        amount: Yup.number().typeError('El monto debe ser un número').required('Monto es obligatorio').positive('El monto debe ser mayor a cero'),
+    });
+    const handleSave = async() => {
+       
+        try {
+            const amountNumber = parseFloat(amount);
+            
+            await schema.validate({ alias, referencia, amount: amountNumber  });
+            
+            console.log('Alias:', alias);
+            console.log('referencia:', referencia);
+            console.log('Amount:', amount);
+          } catch (error) {
+            
+            console.error('Error de validación:', error.message);
+            alert(error.message);
+          }
     };
 
     return (
@@ -26,7 +43,7 @@ export default function RegisterJuegos(){
           <TextInput
             style={styles.input}
             placeholder="Referencia"
-            onChangeText={(text) => setReference(text)}
+            onChangeText={(text) => setReferencia(text)}
             underlineColorAndroid="#0A497C"
           />
     

@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import React, {useState} from "react";
 
-export default function RegisterGas(){
+export default function RegisterGas(props){
+    const { navigation } = props
     const [alias, setAlias] = useState('');
     const [reference, setReference] = useState('');
     const [amount, setAmount] = useState('');

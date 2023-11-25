@@ -1,11 +1,10 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-// import Picker from '@react-native-picker/picker';
-// import Picker from 'react-native-picker';
 import RNPickerSelectet from "react-native-picker-select";
 import React, {useState} from "react";
 import { pick, values } from 'lodash';
 
-export default function RegisterInternet(){
+export default function RegisterInternet(props){
+  const { navigation } = props
     const [proveedor, setProveedor] = useState('');
     const [correo, setCorreo] = useState('');
     const [referencia, setReferencia] = useState('');

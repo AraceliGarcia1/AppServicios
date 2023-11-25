@@ -2,7 +2,8 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 import RNPickerSelectet from "react-native-picker-select";
 import React, {useState} from "react";
 
-export default function RegisterStreaming(){
+export default function RegisterStreaming(props){
+    const { navigation } = props
     const [proveedor, setProveedor] = useState('');
     const [correo, setCorreo] = useState('');
     const [referencia, setReferencia] = useState('');

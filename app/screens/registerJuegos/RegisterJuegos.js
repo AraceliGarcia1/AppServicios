@@ -3,7 +3,8 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity  } from 'react-nati
 import * as Yup from 'yup';
 
 
-export default function RegisterJuegos(){
+export default function RegisterJuegos(props){
+  const { navigation } = props
     const [alias, setAlias] = useState('');
     const [referencia, setReferencia] = useState('');
     const [amount, setAmount] = useState('');
@@ -16,40 +17,43 @@ export default function RegisterJuegos(){
     const handleSave = async() => {
        
         try {
-            const amountNumber = parseFloat(amount);
-            
-            await schema.validate({ alias, referencia, amount: amountNumber  });
-            
+          const amountNumber = parseFloat(amount);
+          const isValid = await schema.isValid({ alias, referencia, amount: amountNumber });
+      
+          if (isValid) {
             console.log('Alias:', alias);
-            console.log('referencia:', referencia);
+            console.log('Referencia:', referencia);
             console.log('Amount:', amount);
-          } catch (error) {
-            
-            console.error('Error de validación:', error.message);
-            alert(error.message);
+          } else {
+            throw new Error('Todos los campos son requeridos');
           }
+        } catch (error) {
+          console.error('Error de validación:', error.message);
+          alert(error.message);
+        }
     };
 
     return (
+      
         <View style={styles.container}>
         
           <TextInput
           style={styles.input}
-          placeholder="Alias"
+          placeholder="Alias *"
           onChangeText={(text) => setAlias(text)}
           underlineColorAndroid="#0A497C"
         />
     
           <TextInput
             style={styles.input}
-            placeholder="Referencia"
+            placeholder="Referencia *"
             onChangeText={(text) => setReferencia(text)}
             underlineColorAndroid="#0A497C"
           />
     
           <TextInput
             style={styles.input}
-            placeholder="Monto"
+            placeholder="Monto *"
             keyboardType="numeric"
             onChangeText={(text) => setAmount(text)}
             underlineColorAndroid="#0A497C"

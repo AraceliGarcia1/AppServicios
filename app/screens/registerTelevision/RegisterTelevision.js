@@ -3,7 +3,8 @@ import RNPickerSelectet from "react-native-picker-select";
 import React, {useState} from "react";
 
 
-export default function RegisterInternet(){
+export default function RegisterTelevision(props){
+    const { navigation } = props
     const [proveedor, setProveedor] = useState('');
     const [referencia, setReferencia] = useState('');
     const [alias, setAlias] = useState('');

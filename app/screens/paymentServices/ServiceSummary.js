@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
-export default function Favorites() {
+export default function ServiceSummary() {
   return (
     <View>
-      <Text>Favoritos</Text>
+      <Text>Resumen de Pago</Text>
     </View>
   );
 }

@@ -9,6 +9,8 @@ import RegisterWater from "../screens/registerServiceWater/RegisterWater";
 import RegisterStreaming from "../screens/registerStreaming/RegisterStreaming";
 import RegisterTelefono from "../screens/registerTelefono/RegisterTelefono";
 import RegisterTelevision from "../screens/registerTelevision/RegisterTelevision";
+import Cards from "../screens/favorites/Cards";
+import ServiceSummary from "../screens/paymentServices/ServiceSummary";
 const Stack = createStackNavigator();
 
 export default function PaymentServicesStack() {
@@ -65,6 +67,17 @@ export default function PaymentServicesStack() {
         component={RegisterTelevision}
         options={{ title: "Televisión" }}
       />
+      <Stack.Screen
+        name="tarjetas"
+        component={Cards}
+        options={{ title: "Mis tarjetas" }}
+      />
+       <Stack.Screen
+        name="resumen"
+        component={ServiceSummary}
+        options={{ title: "Resumen del Servicio" }}
+      />
+
     </Stack.Navigator>
   );
 }

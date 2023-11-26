@@ -5,7 +5,6 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function PaymentServices(props) {
   const navigation = useNavigation()
-  const { gas } = props;
   return (
     <View>
       <View style={styles.rowContainer}>
@@ -107,4 +106,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-between", 
     alignItems: "center",
   },
+ 
 });

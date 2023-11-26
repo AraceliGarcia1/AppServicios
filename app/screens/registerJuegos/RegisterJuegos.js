@@ -24,6 +24,7 @@ export default function RegisterJuegos(props){
             console.log('Alias:', alias);
             console.log('Referencia:', referencia);
             console.log('Amount:', amount);
+            navigation.navigate('tarjetas');
           } else {
             throw new Error('Todos los campos son requeridos');
           }
@@ -60,7 +61,7 @@ export default function RegisterJuegos(props){
           />
     
           <TouchableOpacity style={styles.button} onPress={handleSave}>
-            <Text style={styles.buttonText}>Guardar</Text>
+            <Text style={styles.buttonText}>Continuar</Text>
           </TouchableOpacity>
         </View>
       );

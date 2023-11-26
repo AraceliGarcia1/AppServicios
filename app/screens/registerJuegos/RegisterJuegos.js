@@ -1,98 +1,197 @@
-import React, {useState} from "react";
-import { StyleSheet, Text, View, TextInput, TouchableOpacity  } from 'react-native';
-import * as Yup from 'yup';
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  Animated, ActivityIndicator
+} from "react-native";
+import * as Yup from "yup";
+import { addDoc, collection } from "@firebase/firestore";
+import { db } from "../../utils/Firebase";
+import uuid from "random-uuid-v4";
+import { RadioButton } from "react-native-paper";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+export default function RegisterJuegos(props) {
+  const [selectedCardIndex, setSelectedCardIndex] = useState(0);
+  const { navigation } = props;
+  const [alias, setAlias] = useState("");
+  const [referencia, setReferencia] = useState("");
+  const [amount, setAmount] = useState(""); 
+  const [loading, setLoading] = useState(false); 
+  const cardData = [
+    {
+      name: "citibanamex 9012",
+      imageUri: require("../../assets/citibanamex.png"),
+    },
+    {
+      name: "banco azteca 5678",
+      imageUri: require("../../assets/azteca.png"),
+    },
+    {
+      name: "bbva 7899",
+      imageUri: require("../../assets/bbva.png"),
+    },
+  ];
+  const [isCardListVisible, setIsCardListVisible] = useState(false);
 
+  const schema = Yup.object().shape({
+    alias: Yup.string().required("Alias es obligatorio"),
+    referencia: Yup.string().required("Referencia es obligatoria"),
+    amount: Yup.number()
+      .typeError("El monto debe ser un número")
+      .required("Monto es obligatorio")
+      .positive("El monto debe ser mayor a cero"),
+  });
 
-export default function RegisterJuegos(props){
-  const { navigation } = props
-    const [alias, setAlias] = useState('');
-    const [referencia, setReferencia] = useState('');
-    const [amount, setAmount] = useState('');
- 
-    const schema = Yup.object().shape({
-        alias: Yup.string().required('Alias es obligatorio'),
-        referencia: Yup.string().required('Referencia es obligatoria'),
-        amount: Yup.number().typeError('El monto debe ser un número').required('Monto es obligatorio').positive('El monto debe ser mayor a cero'),
-    });
-    const handleSave = async() => {
-       
+  const handleCardSelect = (index) => {
+    setSelectedCardIndex(index);
+    setIsCardListVisible(false);
+  };
+  const toggleCardListVisibility = () => {
+    setIsCardListVisible(!isCardListVisible);
+  };
+
+  const handleSave = async () => {
+    try {
+      const amountNumber = parseFloat(amount);
+      const isValid = await schema.isValid({
+        alias,
+        referencia,
+        amount: amountNumber,
+      });
+      if (isValid) {
         try {
-          const amountNumber = parseFloat(amount);
-          const isValid = await schema.isValid({ alias, referencia, amount: amountNumber });
-      
-          if (isValid) {
-            console.log('Alias:', alias);
-            console.log('Referencia:', referencia);
-            console.log('Amount:', amount);
-            navigation.navigate('tarjetas');
-          } else {
-            throw new Error('Todos los campos son requeridos');
-          }
+        setLoading(true);
+        const nameCard = cardData[selectedCardIndex].name;
+        const docRef = await addDoc(collection(db, "juegos"), {
+          id: uuid(),
+          alias: alias,
+          referencia: referencia,
+          amount: amount,
+          card: nameCard,
+          createAt: new Date(),
+        });
+        console.log("id ",docRef.id)
+        navigation.navigate("resumen",{docId:docRef.id});
         } catch (error) {
-          console.error('Error de validación:', error.message);
-          alert(error.message);
+          console.log(error)
+        }finally{
+          setLoading(false);
         }
-    };
-
-    return (
-      
-        <View style={styles.container}>
         
-          <TextInput
-          style={styles.input}
-          placeholder="Alias *"
-          onChangeText={(text) => setAlias(text)}
-          underlineColorAndroid="#0A497C"
-        />
-    
-          <TextInput
-            style={styles.input}
-            placeholder="Referencia *"
-            onChangeText={(text) => setReferencia(text)}
-            underlineColorAndroid="#0A497C"
-          />
-    
-          <TextInput
-            style={styles.input}
-            placeholder="Monto *"
-            keyboardType="numeric"
-            onChangeText={(text) => setAmount(text)}
-            underlineColorAndroid="#0A497C"
-          />
-    
-          <TouchableOpacity style={styles.button} onPress={handleSave}>
-            <Text style={styles.buttonText}>Continuar</Text>
-          </TouchableOpacity>
+      } else {
+        throw new Error("Todos los campos son requeridos");
+      }
+    } catch (error) {
+      console.error("Error de validación:", error.message);
+      alert(error.message);
+    }
+  };
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="blue" />
+      </View>
+    );
+  }
+
+  return (
+    <ScrollView>
+      <TextInput
+        style={styles.input}
+        placeholder="Alias *"
+        onChangeText={(text) => setAlias(text)}
+        underlineColorAndroid="#0A497C"
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Referencia *"
+        onChangeText={(text) => setReferencia(text)}
+        underlineColorAndroid="#0A497C"
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Monto *"
+        keyboardType="numeric"
+        onChangeText={(text) => setAmount(text)}
+        underlineColorAndroid="#0A497C"
+      />
+      <TouchableOpacity onPress={toggleCardListVisibility}>
+        <View style={styles.cardContent}>
+          <Text style={styles.cardTitle}>Tarjetas</Text>
+          <Icon name="eye" size={40} color="black" />
         </View>
-      );
+      </TouchableOpacity>
+      {isCardListVisible && (
+        <View>
+          {cardData.map((card, index) => (
+            <View style={styles.rowContainer} key={index}>
+              <View style={styles.card}>
+                <Image style={styles.cardImage} source={card.imageUri} />
+              </View>
+              <RadioButton
+                value={index}
+                status={selectedCardIndex === index ? "checked" : "unchecked"}
+                onPress={() => handleCardSelect(index)}
+              />
+            </View>
+          ))}
+        </View>
+      )}
+      <TouchableOpacity style={styles.button} onPress={handleSave}>
+        <Text style={styles.buttonText}>Continuar</Text>
+      </TouchableOpacity>
+    </ScrollView>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-      marginTop: 15,
-      flex: 1,
-      paddingHorizontal: 16,
-    },
-    inputContainer: {
-      marginBottom: 16,
-      borderBottomWidth: 1,
-      borderBottomColor: 'pink',
-    },
-    input: {
-      marginTop:20,
-      height: 40,
-      fontSize: 16,
-      paddingHorizontal: 10,
-    },
-    button: {
-      marginTop:450,
-      backgroundColor: 'green',
-      borderRadius: 10,
-      paddingVertical: 12,
-      alignItems: 'center',
-    },
-    buttonText: {
-      color: 'white',
-      fontSize: 18,
-    },
-  });
+  container: {
+    marginTop: 15,
+    flex: 1,
+    paddingHorizontal: 16,
+  },
+  inputContainer: {
+    marginBottom: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: "pink",
+  },
+  input: {
+    marginTop: 20,
+    height: 40,
+    fontSize: 16,
+    paddingHorizontal: 10,
+  },
+  button: {
+    marginTop: 45,
+    backgroundColor: "green",
+    borderRadius: 10,
+    paddingVertical: 12,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 18,
+  },
+  cardImage: {
+    width: 250,
+    height: 150,
+  },
+  rowContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 30,
+    marginTop: 20,
+  },
+  cardContent: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+});

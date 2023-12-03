@@ -35,7 +35,6 @@ export default function RegisterTelefono(props){
 
     const schema = Yup.object().shape({
       proveedor: Yup.string().required('Proveedor es obligatorio'),
-      correo: Yup.string().required('Correo es obligatorio'),
       telefono: Yup.string().required('Télefono es obligatoria'),
       alias: Yup.string().required('Alias es obligatorio'),
       amount: Yup.number()
@@ -57,7 +56,8 @@ export default function RegisterTelefono(props){
         const amountNumber = parseFloat(amount);
         const isValid = await schema.isValid({
           alias,
-          referencia,
+          telefono,
+          proveedor,
           amount: amountNumber,
         });
         if (isValid) {
@@ -67,7 +67,6 @@ export default function RegisterTelefono(props){
             const docRef = await addDoc(collection(db, 'telefono'), {
               id: uuid(),
               proveedor:proveedor,
-              // correo:correo,
               telefono: telefono,
               alias: alias,
               amount: amount,
@@ -75,7 +74,7 @@ export default function RegisterTelefono(props){
               createAt: new Date(),
             });
             console.log('id ', docRef.id);
-            navigation.navigate('resumen', { docId: docRef.id });
+            navigation.navigate('resumenTelefono', { docId: docRef.id });
           } catch (error) {
             console.log(error);
           } finally {
@@ -111,16 +110,7 @@ export default function RegisterTelefono(props){
           >
 
         </RNPickerSelectet>
-        {/* <Text style={{ ...styles.label, fontWeight: '800', fontSize: 20 }}>
-					Correo
-				</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Correo Electronico"
-          onChangeText={(text) => setCorreo(text)}
-          keyboardType="email-address"
-          underlineColorAndroid="#0A497C"
-        /> */}
+        
         <Text style={{ ...styles.label, fontWeight: '800', fontSize: 20 }}>
 					Teléfono
 				</Text>

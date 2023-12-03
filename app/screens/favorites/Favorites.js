@@ -17,7 +17,7 @@ export default function Favorites() {
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
 	const handleCreditCardPress = () => {
-		navigation.navigate('tarjetas');
+		navigation.navigate("tarjetas");
 	};
 
 	const handleTrashPress = () => {

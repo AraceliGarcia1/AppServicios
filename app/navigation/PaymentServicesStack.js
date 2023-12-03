@@ -11,6 +11,9 @@ import RegisterTelefono from "../screens/registerTelefono/RegisterTelefono";
 import RegisterTelevision from "../screens/registerTelevision/RegisterTelevision";
 import Cards from "../screens/favorites/Cards";
 import ServiceSummary from "../screens/paymentServices/ServiceSummary";
+import ServiceSummaryGas from "../screens/paymentServices/ServiceSummaryGas";
+import ServiceSummaryInternet from "../screens/paymentServices/ServiceSummaryInternet";
+import ServiceSummaryAgua from "../screens/paymentServices/ServiceSummaryAgua";
 const Stack = createStackNavigator();
 
 export default function PaymentServicesStack() {
@@ -75,6 +78,21 @@ export default function PaymentServicesStack() {
        <Stack.Screen
         name="resumen"
         component={ServiceSummary}
+        options={{ title: "Resumen del Servicio" }}
+      />
+      <Stack.Screen
+        name="resumenGas"
+        component={ServiceSummaryGas}
+        options={{ title: "Resumen del Servicio" }}
+      />
+      <Stack.Screen
+        name="resumenInternet"
+        component={ServiceSummaryInternet}
+        options={{ title: "Resumen del Servicio" }}
+      />
+      <Stack.Screen
+        name="resumenAgua"
+        component={ServiceSummaryAgua}
         options={{ title: "Resumen del Servicio" }}
       />
 

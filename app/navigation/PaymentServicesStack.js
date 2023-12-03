@@ -16,6 +16,8 @@ import ServiceSummaryInternet from "../screens/paymentServices/ServiceSummaryInt
 import ServiceSummaryAgua from "../screens/paymentServices/ServiceSummaryAgua";
 import ServiceSummaryTelefono from "../screens/paymentServices/ServiceSummaryTelefono";
 import ServiceSummaryStreaming from "../screens/paymentServices/ServiceSummaryStreaming";
+import ServiceSummaryTelevision from "../screens/paymentServices/ServiceSummaryTelevision";
+import ServiceSummaryLuz from "../screens/paymentServices/ServiceSummaryLuz";
 const Stack = createStackNavigator();
 
 export default function PaymentServicesStack() {
@@ -105,6 +107,16 @@ export default function PaymentServicesStack() {
       <Stack.Screen
         name="resumenStreaming"
         component={ServiceSummaryStreaming}
+        options={{ title: "Resumen del Servicio" }}
+      />
+      <Stack.Screen
+        name="resumenTelevision"
+        component={ServiceSummaryTelevision}
+        options={{ title: "Resumen del Servicio" }}
+      />
+      <Stack.Screen
+        name="resummenLuz"
+        component={ServiceSummaryLuz}
         options={{ title: "Resumen del Servicio" }}
       />
       

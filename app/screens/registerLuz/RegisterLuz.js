@@ -67,7 +67,7 @@ export default function RegisterLuz(props){
               createAt: new Date(),
             });
             console.log('id ', docRef.id);
-            navigation.navigate('resummen', { docId: docRef.id });
+            navigation.navigate('resummenLuz', { docId: docRef.id });
           } catch (error) {
             console.log(error);
           } finally {

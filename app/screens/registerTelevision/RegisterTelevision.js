@@ -73,7 +73,7 @@ export default function RegisterTelevision(props){
               createAt: new Date(),
             });
             console.log('id ', docRef.id);
-            navigation.navigate('resumen', { docId: docRef.id });
+            navigation.navigate('resumenTelevision', { docId: docRef.id });
           } catch (error) {
             console.log(error);
           } finally {

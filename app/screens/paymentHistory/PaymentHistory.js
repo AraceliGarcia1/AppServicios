@@ -5,7 +5,7 @@ import {
   ActivityIndicator,
   ScrollView,
 } from "react-native";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { collection, doc, getDocs, deleteDoc } from "firebase/firestore";
 import { db } from "../../utils/Firebase";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";

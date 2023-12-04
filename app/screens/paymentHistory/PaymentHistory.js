@@ -108,11 +108,12 @@ export default function PaymentHistory() {
       </View>
     );
   }
-
+   
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={{ fontWeight: "bold", fontSize: 20 }}>Juegos</Text>
       {juegos.map((juego, index) => (
+        
         <View style={styles.card}>
           <View style={styles.cardContent}>
             <Text style={{ fontWeight: "bold", fontSize: 20 }}>
@@ -121,6 +122,7 @@ export default function PaymentHistory() {
             <Text>Precio: {juego.amount}</Text>
             <Text>Referencia:{juego.referencia}</Text>
             <Text>Tarjeta:{juego.card}</Text>
+            <Text>Fecha:{juego.createAt.toDate().toLocaleString()}</Text>
           </View>
         </View>
       ))}
@@ -134,6 +136,7 @@ export default function PaymentHistory() {
             <Text>Precio: {agua.amount}</Text>
             <Text>Referencia:{agua.referencia}</Text>
             <Text>Tarjeta:{agua.card}</Text>
+            <Text>Fecha:{agua.createAt.toDate().toLocaleString()}</Text>
           </View>
         </View>
       ))}
@@ -147,6 +150,7 @@ export default function PaymentHistory() {
             <Text>Precio: {gas.amount}</Text>
             <Text>Referencia:{gas.referencia}</Text>
             <Text>Tarjeta:{gas.card}</Text>
+            <Text>Fecha:{gas.createAt.toDate().toLocaleString()}</Text>
           </View>
         </View>
       ))}
@@ -161,6 +165,7 @@ export default function PaymentHistory() {
             <Text>Referencia:{internet.referencia}</Text>
             <Text>Provedor:{internet.proveedor}</Text>
             <Text>Tarjeta:{internet.card}</Text>
+            <Text>Fecha:{internet.createAt.toDate().toLocaleString()}</Text>
           </View>
         </View>
       ))}
@@ -176,6 +181,7 @@ export default function PaymentHistory() {
             <Text>Teléfono:{telefono.telefono}</Text>
             <Text>Provedor:{telefono.proveedor}</Text>
             <Text>Tarjeta:{telefono.card}</Text>
+            <Text>Fecha:{telefono.createAt.toDate().toLocaleString()}</Text>
           </View>
         </View>
       ))}
@@ -191,6 +197,7 @@ export default function PaymentHistory() {
             <Text>Referencia:{television.referencia}</Text>
             <Text>Provedor:{television.proveedor}</Text>
             <Text>Tarjeta:{television.card}</Text>
+            <Text>Fecha:{television.createAt.toDate().toLocaleString()}</Text>
           </View>
         </View>
       ))}
@@ -206,6 +213,7 @@ export default function PaymentHistory() {
             <Text>Referencia:{streaming.referencia}</Text>
             <Text>Provedor:{streaming.proveedor}</Text>
             <Text>Tarjeta:{streaming.card}</Text>
+            <Text>Fecha:{streaming.createAt.toDate().toLocaleString()}</Text>
           </View>
         </View>
       ))}
@@ -220,6 +228,7 @@ export default function PaymentHistory() {
             <Text>Precio: {luz.amount}</Text>
             <Text>Referencia:{luz.referencia}</Text>
             <Text>Tarjeta:{luz.card}</Text>
+            <Text>Fecha:{luz.createAt.toDate().toLocaleString()}</Text>
           </View>
         </View>
       ))}

@@ -21,7 +21,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 
 export default function RegisterStreaming(props) {
   const [selectedCardIndex, setSelectedCardIndex] = useState(0);
-  const [isEnabled, setIsEnabled] = useState(false);
+  //const [isEnabled, setIsEnabled] = useState(false);
   const { navigation } = props;
   const [proveedor, setProveedor] = useState("");
   const [referencia, setReferencia] = useState("");
@@ -44,7 +44,15 @@ export default function RegisterStreaming(props) {
     },
   ];
   const [isCardListVisible, setIsCardListVisible] = useState(false);
-
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => {
+    if (!isEnabled) {
+      setIsEnabled(true);
+    } else {
+      setIsEnabled(false);
+    }
+    console.log("Valor", !isEnabled);
+  };
   const schema = Yup.object().shape({
     proveedor: Yup.string().required("Proveedor es obligatorio"),
     referencia: Yup.string().required("Referencia es obligatoria"),
@@ -87,6 +95,7 @@ export default function RegisterStreaming(props) {
             referencia: referencia,
             alias: alias,
             amount: amount,
+            enable: isEnabled,
             card: nameCard,
             createAt: new Date(),
           });
@@ -111,14 +120,6 @@ export default function RegisterStreaming(props) {
       </View>
     );
   }
-
-  // const [selectedDate, setSelectedDate] = useState(new Date());
-  // const onDateChange = (event, selectedDate) => {
-  //   setShowDatePicker(false);
-  //   if (selectedDate) {
-  //     setSelectedDate(selectedDate);
-  //   }
-  // };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -167,29 +168,20 @@ export default function RegisterStreaming(props) {
           onChangeText={(text) => setAmount(text)}
           underlineColorAndroid="#0A497C"
         />
-        <View style={styles.switchContainer}>
-          <View style={styles.textContainer}>
-            <Text style={{ fontWeight: "normal", marginTop: 5 }}>
-              ¿Guardar? Selecciona la próxima fecha{" "}
-            </Text>
-          </View>
-          {/* <Switch
-            style={{ alignContent: "center", justifyContent: "center" }}
+        <View style={styles.rowContainer}>
+          <Text style={{ ...styles.label, fontWeight: "800", fontSize: 20 }}>
+            ¿Guardar?
+          </Text>
+          <Switch
+            style={{ alignContent: "center" }}
             trackColor={{ false: "#767577", true: "green" }}
             thumbColor={isEnabled ? "green" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
             onValueChange={toggleSwitch}
             value={isEnabled}
           />
-          {isEnabled && (
-            <DateTimePicker
-              value={selectedDate}
-              mode="calendar"
-              is24Hour={true}
-              display="default"
-              onChange={onDateChange}
-            />
-          )} */}
         </View>
+   
       </View>
       <TouchableOpacity onPress={toggleCardListVisibility}>
         <View style={styles.cardContent}>
@@ -282,7 +274,7 @@ const styles = StyleSheet.create({
     padding: 20,
     maxWidth: 800,
     width: "90%",
-    height: 450,
+    height: 480,
     marginTop: 20,
     // alignItems: 'center',
   },

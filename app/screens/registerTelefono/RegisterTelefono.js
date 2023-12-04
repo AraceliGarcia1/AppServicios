@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View,Switch, TextInput, TouchableOpacity, Image, ScrollView, ActivityIndicator } from 'react-native';
 import RNPickerSelectet from "react-native-picker-select";
 import React, {useState} from "react";
 import * as Yup from 'yup';
@@ -32,7 +32,15 @@ export default function RegisterTelefono(props){
       },
     ];
     const [isCardListVisible, setIsCardListVisible] = useState(false);
-
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = () => {
+      if (!isEnabled) {
+        setIsEnabled(true);
+      } else {
+        setIsEnabled(false);
+      }
+      console.log("Valor", !isEnabled);
+    };
     const schema = Yup.object().shape({
       proveedor: Yup.string().required('Proveedor es obligatorio'),
       telefono: Yup.string().required('Télefono es obligatoria'),
@@ -70,6 +78,7 @@ export default function RegisterTelefono(props){
               telefono: telefono,
               alias: alias,
               amount: amount,
+              enable:isEnabled,
               card: nameCard,
               createAt: new Date(),
             });
@@ -140,6 +149,19 @@ export default function RegisterTelefono(props){
             onChangeText={(text) => setAmount(text)}
             underlineColorAndroid="#0A497C"
           />
+          <View style={styles.rowContainer}>
+          <Text style={{ ...styles.label, fontWeight: "800", fontSize: 20 }}>
+            ¿Guardar?
+          </Text>
+          <Switch
+            style={{ alignContent: "center" }}
+            trackColor={{ false: "#767577", true: "green" }}
+            thumbColor={isEnabled ? "green" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={toggleSwitch}
+            value={isEnabled}
+          />
+        </View>
         </View>
         <TouchableOpacity onPress={toggleCardListVisibility}>
 				<View style={styles.cardContent}>

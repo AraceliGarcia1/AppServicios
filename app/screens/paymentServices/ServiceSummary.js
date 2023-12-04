@@ -1,298 +1,3 @@
-// import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
-// import React, { useEffect, useState } from 'react';
-// import { collection, doc, getDoc } from 'firebase/firestore';
-// import { db } from '../../utils/Firebase';
-
-// export default function ServiceSummary({ route }) {
-// 	console.log(route);
-// 	console.log(route.params);
-// 	const { docId } = route.params;
-// 	const [documento, setDocumento] = useState(null);
-// 	const [loading, setLoading] = useState(true);
-
-// 	useEffect(() => {
-// 		const fetchData = async () => {
-// 			try {
-// 				const documentSnapshot = await getDoc(doc(db, 'juegos', docId));
-// 				if (documentSnapshot.exists()) {
-// 					setDocumento(documentSnapshot.data());
-
-// 					console.log('documento existe');
-// 				} else {
-// 					console.log('El documento no existe');
-// 				}
-// 			} catch (error) {
-// 				console.error('Error al obtener el documento:', error);
-// 			} finally {
-// 				setLoading(false);
-// 			}
-// 		};
-
-// 		fetchData();
-// 	}, [docId]);
-
-// 	if (loading) {
-// 		return (
-// 			<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-// 				<ActivityIndicator size="large" color="blue" />
-// 			</View>
-// 		);
-// 	}
-
-// 	return (
-// 		<View style={styles.card}>
-// 			<Text style={styles.label}>
-// 				Alias: <Text style={{ fontWeight: 'normal' }}>{documento?.alias}</Text>
-// 			</Text>
-// 			<Text style={styles.label}>
-// 				Monto: <Text style={{ fontWeight: 'normal' }}>{documento?.amount}</Text>
-// 			</Text>
-// 			<Text style={styles.label}>
-// 				Referencia:{' '}
-// 				<Text style={{ fontWeight: 'normal' }}>{documento?.referencia}</Text>
-// 			</Text>
-// 			<Text style={styles.label}>
-// 				Tarjeta: <Text style={{ fontWeight: 'normal' }}>{documento?.card}</Text>
-// 			</Text>
-// 		</View>
-// 	);
-// }
-
-// const styles = StyleSheet.create({
-// 	card: {
-// 		backgroundColor: '#fff',
-// 		borderRadius: 8,
-// 		padding: 20,
-// 		maxWidth: 800,
-// 		width: '90%',
-// 		height: 320,
-// 		marginTop: 20,
-// 		alignSelf: 'center',
-// 	},
-// 	label: {
-// 		fontWeight: '800',
-// 		fontSize: 20,
-// 		marginBottom: 10,
-// 	},
-// });
-
-// import {
-// 	StyleSheet,
-// 	Text,
-// 	View,
-// 	ActivityIndicator,
-// 	TouchableOpacity,
-// 	Modal,
-// } from 'react-native';
-// import React, { useEffect, useState } from 'react';
-// import { collection, doc, getDoc } from 'firebase/firestore';
-// import { db } from '../../utils/Firebase';
-
-// export default function ServiceSummary({ route }) {
-// 	console.log(route);
-// 	console.log(route.params);
-// 	const { docId } = route.params;
-// 	const [documento, setDocumento] = useState(null);
-// 	const [loading, setLoading] = useState(true);
-// 	const [showDeleteModal, setShowDeleteModal] = useState(false);
-
-// 	useEffect(() => {
-// 		const fetchData = async () => {
-// 			try {
-// 				const documentSnapshot = await getDoc(doc(db, 'juegos', docId));
-// 				if (documentSnapshot.exists()) {
-// 					setDocumento(documentSnapshot.data());
-
-// 					console.log('documento existe');
-// 				} else {
-// 					console.log('El documento no existe');
-// 				}
-// 			} catch (error) {
-// 				console.error('Error al obtener el documento:', error);
-// 			} finally {
-// 				setLoading(false);
-// 			}
-// 		};
-
-// 		fetchData();
-// 	}, [docId]);
-
-// 	if (loading) {
-// 		return (
-// 			<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-// 				<ActivityIndicator size="large" color="blue" />
-// 			</View>
-// 		);
-// 	}
-
-// 	const handleDeleteConfirm = async () => {
-// 		try {
-// 			await deleteDoc(doc(db, 'juegos', docId));
-// 			console.log('Documento eliminado correctamente');
-// 			// You may want to navigate back or take other actions after deletion
-// 		} catch (error) {
-// 			console.error('Error al eliminar el documento:', error);
-// 		} finally {
-// 			setShowDeleteModal(false);
-// 		}
-// 	};
-
-// 	const handleDeleteCancel = () => {
-// 		setShowDeleteModal(false);
-// 	};
-
-// 	return (
-// 		// <View style={styles.card}>
-// 		// 	<Text style={styles.label}>
-// 		// 		Alias:{' '}
-// 		// 		<Text style={{ fontWeight: 'normal', marginTop: 5 }}>
-// 		// 			{documento?.alias}
-// 		// 		</Text>
-// 		// 	</Text>
-// 		// 	<Text style={styles.label}>
-// 		// 		Monto:{' '}
-// 		// 		<Text style={{ fontWeight: 'normal', marginTop: 5 }}>
-// 		// 			{documento?.amount}
-// 		// 		</Text>
-// 		// 	</Text>
-// 		// 	<Text style={styles.label}>
-// 		// 		Referencia:{' '}
-// 		// 		<Text style={{ fontWeight: 'normal', marginTop: 5 }}>
-// 		// 			{documento?.referencia}
-// 		// 		</Text>
-// 		// 	</Text>
-// 		// 	<Text style={styles.label}>
-// 		// 		Tarjeta:{' '}
-// 		// 		<Text style={{ fontWeight: 'normal', marginTop: 5 }}>
-// 		// 			{documento?.card}
-// 		// 		</Text>
-// 		// 	</Text>
-
-// 		// </View>
-// 		<View style={styles.card}>
-// 			<Text style={styles.label}>
-// 				Alias:{' '}
-// 				<Text style={{ fontWeight: 'normal', marginTop: 5 }}>
-// 					{documento?.alias}
-// 				</Text>
-// 			</Text>
-// 			<Text style={styles.label}>
-// 				Monto:{' '}
-// 				<Text style={{ fontWeight: 'normal', marginTop: 5 }}>
-// 					{documento?.amount}
-// 				</Text>
-// 			</Text>
-// 			<Text style={styles.label}>
-// 				Referencia:{' '}
-// 				<Text style={{ fontWeight: 'normal', marginTop: 5 }}>
-// 					{documento?.referencia}
-// 				</Text>
-// 			</Text>
-// 			<Text style={styles.label}>
-// 				Tarjeta:{' '}
-// 				<Text style={{ fontWeight: 'normal', marginTop: 5 }}>
-// 					{documento?.card}
-// 				</Text>
-// 			</Text>
-
-// 			<View style={styles.buttonContainer}>
-// 				<TouchableOpacity
-// 					style={styles.button}
-// 					onPress={() => setShowDeleteModal(true)}
-// 				>
-// 					<Text style={{ color: 'white' }}>Eliminar</Text>
-// 				</TouchableOpacity>
-// 				<TouchableOpacity style={[styles.button, { backgroundColor: 'green' }]}>
-// 					<Text style={{ color: 'white' }}>Guardar</Text>
-// 				</TouchableOpacity>
-// 			</View>
-
-// 			<Modal
-// 				animationType="fade"
-// 				transparent={true}
-// 				visible={showDeleteModal}
-// 				onRequestClose={() => {
-// 					handleDeleteCancel();
-// 				}}
-// 			>
-// 				<View style={styles.modalContainer}>
-// 					<View style={styles.modalContent}>
-// 						<Text
-// 							style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 20 }}
-// 						>
-// 							¿Estás seguro de eliminar este servicio?
-// 						</Text>
-// 						<View style={styles.modalButtons}>
-// 							<TouchableOpacity
-// 								style={[styles.button, { backgroundColor: 'red' }]}
-// 								onPress={handleDeleteConfirm}
-// 							>
-// 								<Text style={{ color: 'white' }}>Eliminar</Text>
-// 							</TouchableOpacity>
-// 							<TouchableOpacity
-// 								style={[
-// 									styles.button,
-// 									{ backgroundColor: 'gray', marginLeft: 10 },
-// 								]}
-// 								onPress={handleDeleteCancel}
-// 							>
-// 								<Text style={{ color: 'white' }}>Cancelar</Text>
-// 							</TouchableOpacity>
-// 						</View>
-// 					</View>
-// 				</View>
-// 			</Modal>
-// 		</View>
-// 	);
-// }
-
-// const styles = StyleSheet.create({
-// 	card: {
-// 		backgroundColor: '#fff',
-// 		borderRadius: 8,
-// 		padding: 20,
-// 		maxWidth: 800,
-// 		width: '90%',
-// 		height: 320,
-// 		marginTop: 20,
-// 		alignSelf: 'center', // Align the card horizontally to the center
-// 	},
-// 	label: {
-// 		fontWeight: '800',
-// 		fontSize: 25,
-// 		marginBottom: 10,
-// 	},
-// 	buttonContainer: {
-// 		flexDirection: 'row',
-// 		marginTop: 20,
-// 		justifyContent: 'space-around',
-// 	},
-// 	button: {
-// 		backgroundColor: 'red',
-// 		borderRadius: 5,
-// 		paddingVertical: 10,
-// 		paddingHorizontal: 20,
-// 	},
-// 	modalContainer: {
-// 		flex: 1,
-// 		justifyContent: 'center',
-// 		alignItems: 'center',
-// 		backgroundColor: 'rgba(0, 0, 0, 0.5)',
-// 	},
-// 	modalContent: {
-// 		backgroundColor: 'white',
-// 		borderRadius: 8,
-// 		padding: 20,
-// 		maxWidth: 300,
-// 		width: '80%',
-// 		alignItems: 'center',
-// 	},
-// 	modalButtons: {
-// 		flexDirection: 'row',
-// 		justifyContent: 'center',
-// 		marginTop: 20,
-// 	},
-// });
 
 import {
 	StyleSheet,
@@ -305,9 +10,11 @@ import {
 import React, { useEffect, useState } from 'react';
 import { collection, doc, getDoc, deleteDoc } from 'firebase/firestore';
 import { db } from '../../utils/Firebase';
+import { useNavigation } from "@react-navigation/native";
 
 export default function ServiceSummary({ route }) {
 	const { docId } = route.params;
+	const navigation = useNavigation()
 	const [documento, setDocumento] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -344,7 +51,7 @@ export default function ServiceSummary({ route }) {
 		try {
 			await deleteDoc(doc(db, 'juegos', docId));
 			console.log('Documento eliminado correctamente');
-			// You may want to navigate back or take other actions after deletion
+			navigation.navigate("juegos")
 		} catch (error) {
 			console.error('Error al eliminar el documento:', error);
 		} finally {
@@ -357,8 +64,7 @@ export default function ServiceSummary({ route }) {
 	};
 
 	const handleGuardarConfirm = () => {
-		// Implement the logic for saving the service
-		// For now, let's just close the modal
+		navigation.navigate("paymentsHistoryStack")
 		setShowGuardarModal(false);
 	};
 
@@ -368,45 +74,6 @@ export default function ServiceSummary({ route }) {
 
 	return (
 		<View style={styles.card}>
-			{/* <Text style={styles.label}>
-				Alias:{' '}
-				<Text style={{ fontWeight: 'normal', marginTop: 5 }}>
-					{documento?.alias}
-				</Text>
-			</Text>
-			<Text style={styles.label}>
-				Monto:{' '}
-				<Text style={{ fontWeight: 'normal', marginTop: 5 }}>
-					{documento?.amount}
-				</Text>
-			</Text>
-			<Text style={styles.label}>
-				Referencia:{' '}
-				<Text style={{ fontWeight: 'normal', marginTop: 5 }}>
-					{documento?.referencia}
-				</Text>
-			</Text>
-			<Text style={styles.label}>
-				Tarjeta:{' '}
-				<Text style={{ fontWeight: 'normal', marginTop: 5 }}>
-					{documento?.card}
-				</Text>
-			</Text>
-
-			<View style={styles.buttonContainer}>
-				<TouchableOpacity
-					style={[styles.button, { backgroundColor: 'red' }]}
-					onPress={() => setShowDeleteModal(true)}
-				>
-					<Text style={{ color: 'white' }}>Eliminar</Text>
-				</TouchableOpacity>
-				<TouchableOpacity
-					style={[styles.button, { backgroundColor: 'green' }]}
-					onPress={() => setShowGuardarModal(true)}
-				>
-					<Text style={{ color: 'white' }}>Guardar</Text>
-				</TouchableOpacity>
-			</View> */}
 			<Text style={styles.label}>
 				Alias:{' '}
 				<Text style={{ fontWeight: 'normal', marginTop: 5 }}>
@@ -437,13 +104,13 @@ export default function ServiceSummary({ route }) {
 					style={[styles.button, styles.deleteButton]}
 					onPress={() => setShowDeleteModal(true)}
 				>
-					<Text style={styles.buttonText}>Pagar</Text>
+					<Text style={styles.buttonText}>Cancelar</Text>
 				</TouchableOpacity>
 				<TouchableOpacity
 					style={[styles.button, styles.guardarButton]}
 					onPress={() => setShowGuardarModal(true)}
 				>
-					<Text style={styles.buttonText}>Guardar</Text>
+					<Text style={styles.buttonText}>Pagar</Text>
 				</TouchableOpacity>
 			</View>
 
@@ -460,14 +127,14 @@ export default function ServiceSummary({ route }) {
 						<Text
 							style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 30 }}
 						>
-							¿Estás seguro de pagar este servicio?
+							¿Estás seguro de cancelar el pago de este servicio?
 						</Text>
 						<View style={styles.modalButtons}>
 							<TouchableOpacity
-								style={[styles.button, { backgroundColor: 'green' }]}
+								style={[styles.button, { backgroundColor: 'red' }]}
 								onPress={handleDeleteConfirm}
 							>
-								<Text style={{ color: 'white' }}>Pagar</Text>
+								<Text style={{ color: 'white' }}>Si</Text>
 							</TouchableOpacity>
 							<TouchableOpacity
 								style={[
@@ -476,7 +143,7 @@ export default function ServiceSummary({ route }) {
 								]}
 								onPress={handleDeleteCancel}
 							>
-								<Text style={{ color: 'white' }}>Cancelar</Text>
+								<Text style={{ color: 'white' }}>No</Text>
 							</TouchableOpacity>
 						</View>
 					</View>
@@ -496,14 +163,14 @@ export default function ServiceSummary({ route }) {
 						<Text
 							style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 20 }}
 						>
-							¿Quieres guardar este servicio?
+							¿Quieres pagar este servicio?
 						</Text>
 						<View style={styles.modalButtons}>
 							<TouchableOpacity
 								style={[styles.button, { backgroundColor: 'green' }]}
 								onPress={handleGuardarConfirm}
 							>
-								<Text style={{ color: 'white' }}>Guardar</Text>
+								<Text style={{ color: 'white' }}>Pagar</Text>
 							</TouchableOpacity>
 							<TouchableOpacity
 								style={[
@@ -568,7 +235,7 @@ const styles = StyleSheet.create({
 		marginTop: 20,
 	},
 	deleteButton: {
-		backgroundColor: 'green',
+		backgroundColor: 'red',
 	},
 	guardarButton: {
 		backgroundColor: 'green',

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ScrollView, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, Switch,TextInput, TouchableOpacity, Image, ScrollView, ActivityIndicator } from 'react-native';
 import React, {useState} from "react";
 import * as Yup from 'yup';
 import { addDoc, collection } from '@firebase/firestore';
@@ -47,6 +47,15 @@ export default function RegisterGas(props){
     const toggleCardListVisibility = () => {
       setIsCardListVisible(!isCardListVisible);
     };
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = () => {
+      if(!isEnabled){
+        setIsEnabled(true)
+      }else{
+        setIsEnabled(false)
+      }
+      console.log("Valor",!isEnabled)
+    };
 
     const handleSave = async () => {
       try {
@@ -65,6 +74,7 @@ export default function RegisterGas(props){
               alias: alias,
               referencia: referencia,
               amount: amount,
+              enable:isEnabled,
               card: nameCard,
               createAt: new Date(),
             });
@@ -119,11 +129,24 @@ export default function RegisterGas(props){
           </Text>
           <TextInput
             style={styles.input}
-            placeholder="Monto hhhhs*"
+            placeholder="Monto*"
             keyboardType="numeric"
             onChangeText={(text) => setAmount(text)}
             underlineColorAndroid="#0A497C"
           />
+          <View style={styles.rowContainer}>
+           <Text style={{ ...styles.label, fontWeight: '800', fontSize: 20 }}>
+            ¿Guardar?
+          </Text>
+          <Switch
+          style={{alignContent:"center"}}
+          trackColor={{false: '#767577', true: 'green'}}
+          thumbColor={isEnabled ? 'green' : '#f4f3f4'}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+        />
+        </View>
         </View>
           <TouchableOpacity onPress={toggleCardListVisibility}>
             <View style={styles.cardContent}>
@@ -214,7 +237,7 @@ const styles = StyleSheet.create({
 		padding: 20,
 		maxWidth: 800,
 		width: '90%',
-		height: 320,
+		height: 350,
 		marginTop: 20,
 		// alignItems: 'center',
 	},

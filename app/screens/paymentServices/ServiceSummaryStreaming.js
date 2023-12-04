@@ -9,9 +9,10 @@ import {
 import React, { useEffect, useState } from 'react';
 import { collection, doc, getDoc, deleteDoc } from 'firebase/firestore';
 import { db } from '../../utils/Firebase';
-
+import { useNavigation } from "@react-navigation/native";
 export default function ServiceSummaryStreaming({ route }) {
 	const { docId } = route.params;
+	const navigation = useNavigation()
 	const [documento, setDocumento] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -48,7 +49,7 @@ export default function ServiceSummaryStreaming({ route }) {
 		try {
 			await deleteDoc(doc(db, 'streaming', docId));
 			console.log('Documento eliminado correctamente');
-			// You may want to navigate back or take other actions after deletion
+			navigation.navigate("streaming")
 		} catch (error) {
 			console.error('Error al eliminar el documento:', error);
 		} finally {
@@ -61,7 +62,7 @@ export default function ServiceSummaryStreaming({ route }) {
 	};
 
 	const handleGuardarConfirm = () => {
-		
+		navigation.navigate("paymentsHistoryStack")
 		setShowGuardarModal(false);
 	};
 
@@ -107,13 +108,13 @@ export default function ServiceSummaryStreaming({ route }) {
 					style={[styles.button, styles.deleteButton]}
 					onPress={() => setShowDeleteModal(true)}
 				>
-					<Text style={styles.buttonText}>Pagar</Text>
+					<Text style={styles.buttonText}>Cancelar</Text>
 				</TouchableOpacity>
 				<TouchableOpacity
 					style={[styles.button, styles.guardarButton]}
 					onPress={() => setShowGuardarModal(true)}
 				>
-					<Text style={styles.buttonText}>Guardar</Text>
+					<Text style={styles.buttonText}>Pagar</Text>
 				</TouchableOpacity>
 			</View>
 
@@ -130,14 +131,14 @@ export default function ServiceSummaryStreaming({ route }) {
 						<Text
 							style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 30 }}
 						>
-							¿Estás seguro de pagar este servicio?
+							¿Estás seguro de cancelar el pago de este servicio?
 						</Text>
 						<View style={styles.modalButtons}>
 							<TouchableOpacity
-								style={[styles.button, { backgroundColor: 'green' }]}
+								style={[styles.button, { backgroundColor: 'red' }]}
 								onPress={handleDeleteConfirm}
 							>
-								<Text style={{ color: 'white' }}>Pagar</Text>
+								<Text style={{ color: 'white' }}>Si</Text>
 							</TouchableOpacity>
 							<TouchableOpacity
 								style={[
@@ -146,7 +147,7 @@ export default function ServiceSummaryStreaming({ route }) {
 								]}
 								onPress={handleDeleteCancel}
 							>
-								<Text style={{ color: 'white' }}>Cancelar</Text>
+								<Text style={{ color: 'white' }}>No</Text>
 							</TouchableOpacity>
 						</View>
 					</View>
@@ -166,14 +167,14 @@ export default function ServiceSummaryStreaming({ route }) {
 						<Text
 							style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 20 }}
 						>
-							¿Quieres guardar este servicio?
+							¿Quieres pagar este servicio?
 						</Text>
 						<View style={styles.modalButtons}>
 							<TouchableOpacity
 								style={[styles.button, { backgroundColor: 'green' }]}
 								onPress={handleGuardarConfirm}
 							>
-								<Text style={{ color: 'white' }}>Guardar</Text>
+								<Text style={{ color: 'white' }}>Pagar</Text>
 							</TouchableOpacity>
 							<TouchableOpacity
 								style={[
@@ -238,7 +239,7 @@ const styles = StyleSheet.create({
 		marginTop: 20,
 	},
 	deleteButton: {
-		backgroundColor: 'green',
+		backgroundColor: 'red',
 	},
 	guardarButton: {
 		backgroundColor: 'green',

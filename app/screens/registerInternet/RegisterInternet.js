@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Switch,
   ActivityIndicator,
 } from "react-native";
 // import RNPickerSelectet from "react-native-picker-select";
@@ -42,6 +43,15 @@ export default function RegisterInternet(props) {
     },
   ];
   const [isCardListVisible, setIsCardListVisible] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => {
+    if (!isEnabled) {
+      setIsEnabled(true);
+    } else {
+      setIsEnabled(false);
+    }
+    console.log("Valor", !isEnabled);
+  };
   const schema = Yup.object().shape({
     proveedor: Yup.string().required("Correo es obligatorio"),
     referencia: Yup.string().required("Referencia es obligatoria"),
@@ -74,10 +84,6 @@ export default function RegisterInternet(props) {
           throw new Error("Proveedor es obligatorio");
         }
         try {
-          console.log("Proveedor:", proveedor);
-          console.log("Referencia:", referencia);
-          console.log("Alias:", alias);
-          console.log("Amount:", amount);
           setLoading(true);
           const nameCard = cardData[selectedCardIndex].name;
           const docRef = await addDoc(collection(db, "internet"), {
@@ -85,6 +91,7 @@ export default function RegisterInternet(props) {
             proveedor: proveedor,
             referencia: referencia,
             alias: alias,
+            enable: isEnabled,
             amount: amount,
             card: nameCard,
             createAt: new Date(),
@@ -160,6 +167,19 @@ export default function RegisterInternet(props) {
           onChangeText={(text) => setAmount(text)}
           underlineColorAndroid="#0A497C"
         />
+        <View style={styles.rowContainer}>
+          <Text style={{ ...styles.label, fontWeight: "800", fontSize: 20 }}>
+            ¿Guardar?
+          </Text>
+          <Switch
+            style={{ alignContent: "center" }}
+            trackColor={{ false: "#767577", true: "green" }}
+            thumbColor={isEnabled ? "green" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={toggleSwitch}
+            value={isEnabled}
+          />
+        </View>
       </View>
       <TouchableOpacity onPress={toggleCardListVisibility}>
         <View style={styles.cardContent}>
@@ -257,7 +277,7 @@ const styles = StyleSheet.create({
     padding: 20,
     maxWidth: 800,
     width: "90%",
-    height: 420,
+    height: 450,
     marginTop: 20,
     // alignItems: 'center',
   },

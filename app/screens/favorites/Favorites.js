@@ -129,7 +129,7 @@ export default function Favorites() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
 	{juegos.map((juego, index) => (
-      <View style={styles.card}>
+      <View key={`juegos-${index}`} style={styles.card}>
         <View style={styles.cardContent}>
           <Text style={{ fontWeight: "bold", fontSize: 20 }}>
 		  	Alias: {juego.alias}
@@ -154,7 +154,7 @@ export default function Favorites() {
 	  ))}
 
 	  {agua.map((agua, index) => (
-      <View style={styles.card}>
+      <View key={`agua-${index}`} style={styles.card}>
         <View style={styles.cardContent}>
           <Text style={{ fontWeight: "bold", fontSize: 20 }}>
 		  	Alias: {agua.alias}
@@ -179,7 +179,7 @@ export default function Favorites() {
 	  ))}
       
 	  {gas.map((gas, index) => (
-      <View style={styles.card}>
+      <View key={`gas-${index}`} style={styles.card}>
         <View style={styles.cardContent}>
           <Text style={{ fontWeight: "bold", fontSize: 20 }}>
 		  	Alias: {gas.alias}
@@ -204,7 +204,7 @@ export default function Favorites() {
 	  ))}
 
 	  {internet.map((internet, index) => (
-      <View style={styles.card}>
+      <View key={`internet-${index}`} style={styles.card}>
         <View style={styles.cardContent}>
           <Text style={{ fontWeight: "bold", fontSize: 20 }}>
 		  	Alias: {internet.alias}
@@ -229,7 +229,7 @@ export default function Favorites() {
 	  ))}
 
 	  {television.map((television, index) => (
-      <View style={styles.card}>
+      <View key={`television-${index}`} style={styles.card}>
         <View style={styles.cardContent}>
           <Text style={{ fontWeight: "bold", fontSize: 20 }}>
 		  	Alias: {television.alias}
@@ -254,7 +254,7 @@ export default function Favorites() {
 	  ))}
 
 	  {telefono.map((telefono, index) => (
-      <View style={styles.card}>
+      <View key={`telefono-${index}`} style={styles.card}>
         <View style={styles.cardContent}>
           <Text style={{ fontWeight: "bold", fontSize: 20 }}>
 		  	Alias: {telefono.alias}
@@ -279,7 +279,7 @@ export default function Favorites() {
 	  ))}
 
 	  {streaming.map((streaming, index) => (
-      <View style={styles.card}>
+      <View key={`streaming-${index}`} style={styles.card}>
         <View style={styles.cardContent}>
           <Text style={{ fontWeight: "bold", fontSize: 20 }}>
 		  	Alias: {streaming.alias}
@@ -304,7 +304,7 @@ export default function Favorites() {
 	  ))}
 
 	  {luz.map((luz, index) => (
-      <View style={styles.card}>
+      <View key={`luz-${index}`} style={styles.card}>
         <View style={styles.cardContent}>
           <Text style={{ fontWeight: "bold", fontSize: 20 }}>
 		  	Alias: {luz.alias}

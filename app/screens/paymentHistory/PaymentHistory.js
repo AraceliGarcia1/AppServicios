@@ -113,8 +113,7 @@ export default function PaymentHistory() {
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={{ fontWeight: "bold", fontSize: 20 }}>Juegos</Text>
       {juegos.map((juego, index) => (
-        
-        <View style={styles.card}>
+        <View key={`juegos-${index}`} style={styles.card}>
           <View style={styles.cardContent}>
             <Text style={{ fontWeight: "bold", fontSize: 20 }}>
               Alias: {juego.alias}

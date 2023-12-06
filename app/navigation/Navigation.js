@@ -15,7 +15,7 @@ export default function Navigation() {
         initialRouteName="profile"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ color }) => screenOptions(route, color),
-          tabBarActiveTintColor: "blue",
+          tabBarActiveTintColor: "#14CFFF",
           tabBarInactiveTintColor: "gray",
           headerShown: false,
         })}

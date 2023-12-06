@@ -26,7 +26,7 @@ export default function PaymentServicesStack() {
       screenOptions={{
         headerMode: "screen",
         headerTintColor: "white",
-        headerStyle: { backgroundColor: "#0A497B" },
+        headerStyle: { backgroundColor: "#14CFFF" },
       }}
     >
       <Stack.Screen

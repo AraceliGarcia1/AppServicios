@@ -111,7 +111,7 @@ export default function PaymentHistory() {
    
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={{ fontWeight: "bold", fontSize: 20 }}>Juegos</Text>
+      <Text style={{ fontWeight: "bold", fontSize: 20, color:"#1b72af" }}>Juegos</Text>
       {juegos.map((juego, index) => (
         <View key={`juegos-${index}`} style={styles.card}>
           <View style={styles.cardContent}>
@@ -125,7 +125,7 @@ export default function PaymentHistory() {
           </View>
         </View>
       ))}
-      <Text style={{ fontWeight: "bold", fontSize: 20 }}>Agua</Text>
+      <Text style={{ fontWeight: "bold", fontSize: 20, marginTop:10, color:"#1b72af" }}>Agua</Text>
       {agua.map((agua, index) => (
         <View key={`agua-${index}`} style={styles.card}>
           <View style={styles.cardContent}>
@@ -139,7 +139,7 @@ export default function PaymentHistory() {
           </View>
         </View>
       ))}
-      <Text style={{ fontWeight: "bold", fontSize: 20 }}>Gas</Text>
+      <Text style={{ fontWeight: "bold", fontSize: 20,  marginTop:10, color:"#1b72af" }}>Gas</Text>
       {gas.map((gas, index) => (
         <View key={`gas-${index}`} style={styles.card}>
           <View style={styles.cardContent}>
@@ -153,7 +153,7 @@ export default function PaymentHistory() {
           </View>
         </View>
       ))}
-      <Text style={{ fontWeight: "bold", fontSize: 20 }}>Internet</Text>
+      <Text style={{ fontWeight: "bold", fontSize: 20,  marginTop:10, color:"#1b72af"}}>Internet</Text>
       {internet.map((internet, index) => (
         <View key={`internet-${index}`} style={styles.card}>
           <View style={styles.cardContent}>
@@ -169,7 +169,7 @@ export default function PaymentHistory() {
         </View>
       ))}
 
-      <Text style={{ fontWeight: "bold", fontSize: 20 }}>Teléfono</Text>
+      <Text style={{ fontWeight: "bold", fontSize: 20 ,  marginTop:10, color:"#1b72af"}}>Teléfono</Text>
       {telefono.map((telefono, index) => (
         <View key={`telefono-${index}`} style={styles.card}>
           <View style={styles.cardContent}>
@@ -185,7 +185,7 @@ export default function PaymentHistory() {
         </View>
       ))}
 
-      <Text style={{ fontWeight: "bold", fontSize: 20 }}>Televisión</Text>
+      <Text style={{ fontWeight: "bold", fontSize: 20,  marginTop:10, color:"#1b72af" }}>Televisión</Text>
       {television.map((television, index) => (
         <View key={`television-${index}`} style={styles.card}>
           <View style={styles.cardContent}>
@@ -201,7 +201,7 @@ export default function PaymentHistory() {
         </View>
       ))}
 
-      <Text style={{ fontWeight: "bold", fontSize: 20 }}>Streaming</Text>
+      <Text style={{ fontWeight: "bold", fontSize: 20,  marginTop:10, color:"#1b72af" }}>Streaming</Text>
       {streaming.map((streaming, index) => (
         <View key={`streaming-${index}`} style={styles.card}>
           <View style={styles.cardContent}>
@@ -217,7 +217,7 @@ export default function PaymentHistory() {
         </View>
       ))}
 
-	  <Text style={{ fontWeight: "bold", fontSize: 20 }}>Electricidad</Text>
+	  <Text style={{ fontWeight: "bold", fontSize: 20,  marginTop:10, color:"#1b72af"}}>Electricidad</Text>
       {luz.map((luz, index) => (
         <View key={`luz-${index}`} style={styles.card}>
           <View style={styles.cardContent}>
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     height: 130,
-    marginTop: 20,
+    marginTop: 10,
   },
   cardButtons: {
     flexDirection: "row",

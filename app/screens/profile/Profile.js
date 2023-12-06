@@ -48,7 +48,7 @@ const Profile = () => {
 				<Text style={{ ...styles.label, fontWeight: '800', fontSize: 20 }}>
 					Usuario:
 				</Text>
-				<Text>{userData.username}</Text>
+				<Text style={styles.cardText}>{userData.username}</Text>
 				<Text style={{ ...styles.label, fontWeight: '800', fontSize: 20 }}>
 					Correo Electronico:
 				</Text>

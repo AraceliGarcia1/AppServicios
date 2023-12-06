@@ -13,9 +13,9 @@ import {
 const Profile = () => {
 	const [isEditMode, setIsEditMode] = useState(false);
 	const [userData, setUserData] = useState({
-		fullName: 'Nombre Completo',
-		username: 'Nombre de Usuario',
-		email: 'correo@example.com',
+		fullName: 'Andrea Garcia Martinez',
+		username: 'Andrea Garcia 1',
+		email: 'andrea@gmail.com',
 		phoneNumber: '123-456-7890',
 		personalInfo: 'Alguna información personal',
 		password: '********',
@@ -44,7 +44,7 @@ const Profile = () => {
 				<Text style={{ ...styles.label, fontWeight: '800', fontSize: 20 }}>
 					Nombre Completo:
 				</Text>
-				<Text>{userData.fullName}</Text>
+				<Text style={styles.cardText}>{userData.fullName}</Text>
 				<Text style={{ ...styles.label, fontWeight: '800', fontSize: 20 }}>
 					Usuario:
 				</Text>
@@ -52,15 +52,15 @@ const Profile = () => {
 				<Text style={{ ...styles.label, fontWeight: '800', fontSize: 20 }}>
 					Correo Electronico:
 				</Text>
-				<Text>{userData.email}</Text>
+				<Text style={styles.cardText}>{userData.email}</Text>
 				<Text style={{ ...styles.label, fontWeight: '800', fontSize: 20 }}>
 					Número de celular:
 				</Text>
-				<Text>{userData.phoneNumber}</Text>
+				<Text style={styles.cardText}>{userData.phoneNumber}</Text>
 				<Text style={{ ...styles.label, fontWeight: '800', fontSize: 20 }}>
 					Contraseña:
 				</Text>
-				<Text>{userData.password}</Text>
+				<Text style={styles.cardText}>{userData.password}</Text>
 
 				{isEditMode ? (
 					<View>
@@ -92,9 +92,7 @@ const Profile = () => {
 					</View>
 				) : (
 					<View>
-						<Text style={{ ...styles.label, fontWeight: '800', fontSize: 20 }}>
-							Total de pagos: {userData.totalPayments}
-						</Text>
+						
 					</View>
 				)}
 
@@ -102,7 +100,7 @@ const Profile = () => {
 					style={styles.editButton}
 					onPress={isEditMode ? handleSavePress : handleEditPress}
 				>
-					<Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}>
+					<Text style={{ color: '#fff', fontWeight: '500', fontSize: 15 }}>
 						{isEditMode ? 'Guardar' : 'Editar Perfil'}
 					</Text>
 				</TouchableOpacity>
@@ -117,7 +115,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'flex-start',
 		alignItems: 'center',
 		backgroundColor: '#f4f4f4',
-		paddingTop: 20,
+		
 	},
 	card: {
 		backgroundColor: '#fff',
@@ -126,7 +124,7 @@ const styles = StyleSheet.create({
 		maxWidth: 800,
 		width: '90%',
 		height: 800,
-		marginTop: 20,
+		marginTop: 10,
 	},
 	profileImage: {
 		width: 200,
@@ -149,8 +147,13 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		marginTop: 20,
-		width: 100,
+		width: 150,
 	},
+	cardText: {
+		color: "#000",
+		fontSize: 19,
+		alignSelf: 'flex-start',
+	  },
 });
 
 export default Profile;

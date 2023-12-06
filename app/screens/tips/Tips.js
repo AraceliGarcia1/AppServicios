@@ -10,8 +10,8 @@ export default function Tips() {
         }}
       >
         <Text style={styles.cardTitle}>Ajusta la Temperatura del Termostato</Text>
-        <Text>¡Optimiza la temperatura! </Text>
-        <Text>Ahorra energía ajustando el termostato</Text>
+        <Text style={styles.cardText}>¡Optimiza la temperatura! </Text>
+        <Text style={styles.cardText}>Ahorra energía ajustando el termostato</Text>
       </TouchableOpacity>
       </View>
       <View style={styles.card}>
@@ -20,8 +20,8 @@ export default function Tips() {
         }}
       >
         <Text style={styles.cardTitle}>Uso eficiente de Electrodomésticos </Text>
-        <Text>Usa lavadoras y lavavajillas de manera eficiente.</Text>
-        <Text>¡Ahorra agua y energía!</Text>
+        <Text style={styles.cardText}>Usa lavadoras y lavavajillas de manera eficiente.</Text>
+        <Text style={styles.cardText}>¡Ahorra agua y energía!</Text>
       </TouchableOpacity>
       </View>
       <View style={styles.card}>
@@ -30,8 +30,8 @@ export default function Tips() {
         }}
       >
         <Text style={styles.cardTitle}>Repara Fugas de Agua</Text>
-        <Text>Fugas de agua, ¿las has revisado?</Text>
-        <Text>¡Pequeños problemas, grandes soluciones!</Text>
+        <Text style={styles.cardText}>Fugas de agua, ¿las has revisado?</Text>
+        <Text style={styles.cardText}>¡Pequeños problemas, grandes soluciones!</Text>
       </TouchableOpacity>
       </View>
       <View style={styles.card}>
@@ -40,8 +40,8 @@ export default function Tips() {
         }}
       >
         <Text style={styles.cardTitle}>Apaga las luces</Text>
-        <Text>¿Te acuerdas de apagar las luces al salir?</Text>
-        <Text>¡Cada apagón cuenta para ahorrar energía!</Text>
+        <Text style={styles.cardText}>¿Te acuerdas de apagar las luces al salir?</Text>
+        <Text style={styles.cardText}>¡Cada apagón cuenta para ahorrar energía!</Text>
       </TouchableOpacity>
       </View>
       <View style={styles.card}>
@@ -50,8 +50,8 @@ export default function Tips() {
         }}
       >
         <Text style={styles.cardTitle}>Duchas Rápidas</Text>
-        <Text>Intenta reducir el tiempo en la ducha</Text>
-        <Text>¡Menos tiempo, menos agua!</Text>
+        <Text style={styles.cardText}>Intenta reducir el tiempo en la ducha</Text>
+        <Text style={styles.cardText}>¡Menos tiempo, menos agua!</Text>
       </TouchableOpacity>
       </View>
     </View>
@@ -77,7 +77,13 @@ const styles = StyleSheet.create({
 
 },
 cardTitle: {
-  color: "#808080",
+  color: "#000",
+  fontSize: 22,
+  fontWeight:"bold",
+  alignSelf: 'flex-start',
+},
+cardText: {
+  color: "#000",
   fontSize: 19,
   alignSelf: 'flex-start',
 },
